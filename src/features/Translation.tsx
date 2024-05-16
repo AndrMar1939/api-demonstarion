@@ -35,12 +35,12 @@ function Translation() {
   }, [initText])
 
   return (
-    <div className='flex flex-col gap-10 text-2xl items-center'>
-      <p className='mb-[60px] rounded-xl bg-white p-9 flex'>
+    <div className='flex flex-col gap-2 text-2xl items-center'>
+      <p className='mb-[60px] rounded-xl bg-white p-9 flex flex-wrap w-[600px]'>
         {TEXT_TO_TRANSLATE
           .map(word => 
             (<span 
-                className='hover:bg-slate-200 rounded-full p-1'
+                className='hover:bg-slate-200 rounded-full px-3 py-1 transition-all duration-300'
                 key={word}
                 onClick={(e: any) => {
                   const text = e.target.innerText
