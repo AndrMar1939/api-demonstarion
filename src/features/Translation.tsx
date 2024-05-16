@@ -26,6 +26,14 @@ function Translation() {
 
   console.log('rerender')
 
+  const handleTextSelection = () => {
+    const selection = window.getSelection();
+    const selectedText = selection ? selection.toString().trim() : ''
+    if (selectedText) {
+      setInitText(selectedText);
+    }
+  };
+
   useEffect(() => {
     if (initText) {
       translate(initText).then(text => {
@@ -36,7 +44,7 @@ function Translation() {
 
   return (
     <div className='flex flex-col gap-2 text-2xl items-center'>
-      <p className='mb-[60px] rounded-xl bg-white p-9 flex flex-wrap w-[600px]'>
+      <p className='mb-[60px] rounded-xl bg-white p-9 flex flex-wrap w-[600px]' onMouseUp={handleTextSelection}>
         {TEXT_TO_TRANSLATE
           .map(word => 
             (<span 
@@ -45,7 +53,6 @@ function Translation() {
                 onClick={(e: any) => {
                   const text = e.target.innerText
                   setInitText(text)
-                  setTranslatedText('')
                 }}
               >
                 {word}
@@ -56,8 +63,6 @@ function Translation() {
     {initText && <p className='text-5xl font-bold'>{initText}</p>}
 
     {initText && <p className='font-bold'>---</p>}
-
-    {initText && !translatedText && <p className='text-5xl font-bold'>loading...</p>}
 
     {translatedText && <p className='text-5xl font-bold'>{translatedText}</p>}
     </div>
