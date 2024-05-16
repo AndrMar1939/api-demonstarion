@@ -3,9 +3,16 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react'
 
 const TEXT_TO_TRANSLATE = [
-  'An old silent pond...',
-  'A frog jumps into the pond, splash!',
-  'Silence again.',
+  'An old',
+  'silent',
+  'pond...',
+  'A frog',
+  'jumps',
+  'into',
+  'the pond,',
+  'splash!',
+  'Silence',
+  'again.',
 ]
 
 const translate = async (text: string) => {
@@ -48,7 +55,7 @@ function Translation() {
         {TEXT_TO_TRANSLATE
           .map(word => 
             (<span 
-                className='hover:bg-slate-200 rounded-full px-3 py-1 transition-all duration-300 cursor-pointer'
+                className='hover:bg-slate-200 rounded-full px-1 py-1 transition-all duration-300 cursor-pointer'
                 key={word}
                 onClick={(e: any) => {
                   const text = e.target.innerText
