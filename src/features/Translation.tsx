@@ -40,7 +40,7 @@ function Translation() {
         {TEXT_TO_TRANSLATE
           .map(word => 
             (<span 
-                className='hover:bg-slate-200 rounded-full px-3 py-1 transition-all duration-300'
+                className='hover:bg-slate-200 rounded-full px-3 py-1 transition-all duration-300 cursor-pointer'
                 key={word}
                 onClick={(e: any) => {
                   const text = e.target.innerText
