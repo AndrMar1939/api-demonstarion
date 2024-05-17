@@ -2,6 +2,7 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react'
 
+let regexForSingleWord = /[-!.,?/]/g;
 const TEXT_TO_TRANSLATE = [
   'An old',
   'silent',
@@ -58,8 +59,17 @@ function Translation() {
                 className='hover:bg-slate-200 rounded-full px-1 py-1 transition-all duration-300 cursor-pointer'
                 key={word}
                 onClick={(e: any) => {
-                  const text = e.target.innerText
-                  setInitText(text)
+                  const text = e.target.innerText;
+                
+                  const preparedText = !!text
+                    ? text
+                      .replace(regexForSingleWord, '')
+                      .toLowerCase()
+                    : '';
+
+                    console.log(preparedText)
+                
+                  setInitText(preparedText)
                 }}
               >
                 {word}
