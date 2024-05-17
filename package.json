@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@google-cloud/translate": "^8.2.0",
+    "aws-sdk": "^2.1622.0",
     "axios": "^1.6.8",
     "next": "14.2.3",
     "react": "^18",
