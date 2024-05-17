@@ -1,5 +1,4 @@
 import AWS from 'aws-sdk';
-import { Rationale } from 'next/font/google';
 
 AWS.config.update({
   region: 'us-west-2',
@@ -14,7 +13,7 @@ export const synthesizeSpeech = (text: string) => {
   const params = {
     OutputFormat: 'mp3',
     Text: text,
-    VoiceId: 'Joanna',
+    VoiceId: 'Marlene',
   };
 
   polly.synthesizeSpeech(params, (err, data) => {
