@@ -1,6 +1,7 @@
 'use client'
 import axios from 'axios';
 import React, {useEffect, useState} from 'react'
+import { synthesizeSpeech } from './TextToSpeech';
 
 let regexForSingleWord = /[-!.,?/]/g;
 const TEXT_TO_TRANSLATE = [
@@ -42,6 +43,10 @@ function Translation() {
     }
   };
 
+  const handleSynthesize = (text: string) => {
+    synthesizeSpeech(text);
+  };
+
   useEffect(() => {
     if (initText) {
       translate(initText).then(text => {
@@ -81,7 +86,21 @@ function Translation() {
 
     {initText && <p className='font-bold'>---</p>}
 
-    {translatedText && <p className='text-5xl font-bold'>{translatedText}</p>}
+    {translatedText && (
+      <>
+      <p className='text-5xl font-bold'>{translatedText}</p>
+
+      <button
+        className='mt-3 p-5 rounded-full bg-gray-100 border-[1px] border-solid border-green flex justify-center items-center hover:bg-gray-200 active:bg-gray-300'
+        onClick={() => {
+        handleSynthesize(translatedText)
+      }}
+      >
+        play sound
+      </button>
+      
+      </>
+    )}
     </div>
   )
 }
