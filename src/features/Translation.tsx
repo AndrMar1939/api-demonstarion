@@ -2,16 +2,20 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react'
 import { synthesizeSpeech } from './TextToSpeech';
+import { translateTextAzure, getDictionaryLookup } from './TranslationAzure';
 
 let regexForSingleWord = /[-!.,?/]/g;
 const TEXT_TO_TRANSLATE = [
-  'An old',
+  'An',
+  'old',
   'silent',
   'pond...',
-  'A frog',
+  'A',
+  'frog',
   'jumps',
   'into',
-  'the pond,',
+  'the',
+  'pond,',
   'splash!',
   'Silence',
   'again.',
@@ -49,9 +53,17 @@ function Translation() {
 
   useEffect(() => {
     if (initText) {
-      translate(initText).then(text => {
-        setTranslatedText(text)
+      getDictionaryLookup(initText).then(res => {
+        const words = res.length && res[0]?.translations
+
+        console.log(words)
+
+        words?.length && setTranslatedText(`word - ${words[0]?.displayTarget}; ${words[0]?.posTag}`)
       })
+
+      // translateTextAzure(initText).then(text => {
+      //   setTranslatedText(text)
+      // })
     }
   }, [initText])
 
