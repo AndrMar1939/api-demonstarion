@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from 'react'
 import { synthesizeSpeech } from '@/entity';
-import { textSmall, textMedium, convertTextToArr, prepareWordToTranslate } from '@/shared';
+import { textSmall, textMedium, convertTextToArr, prepareWordToTranslate, PlayButton } from '@/shared';
 import { translateGoogle } from './lib';
 
 
@@ -63,19 +63,15 @@ export const TranslationGoogle = () => {
 
         {!!translatedText.length && (
           <>
-          <p className='text-5xl font-bold flex flex-col gap-2'>
-            { translatedText} 
-          </p>
+            <p className='text-5xl font-bold flex flex-col gap-2'>
+              { translatedText} 
+            </p>
 
-          <button
-            className='mt-3 p-5 rounded-full bg-gray-100 border-[1px] border-solid border-green flex justify-center items-center hover:bg-gray-200 active:bg-gray-300'
-            onClick={() => {
-              handleSynthesize(translatedText)
-          }}
-          >
-            play sound
-          </button>
-          
+            <PlayButton
+              onClick={() => {
+                handleSynthesize(translatedText)
+              }}
+            />
           </>
         )}
       </div>
