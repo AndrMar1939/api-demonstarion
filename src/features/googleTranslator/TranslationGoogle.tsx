@@ -60,13 +60,13 @@ export const TranslationGoogle = () => {
       </p>
 
       <div className='w-[400px]'>
-        {initText && <p className='text-5xl font-bold'>{initText}</p>}
+        {initText && <p className='text-2xl font-bold'>{initText}</p>}
 
         {initText && <p className='font-bold'>---</p>}
 
         {!!translatedText.length && (
           <>
-            <p className='text-5xl font-bold flex flex-col gap-2'>
+            <p className='text-2xl font-bold flex flex-col gap-2'>
               { translatedText} 
             </p>
 

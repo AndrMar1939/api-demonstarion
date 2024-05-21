@@ -67,32 +67,43 @@ export const TranslationAzure = () => {
       </p>
 
       <div className='w-[400px]'>
-        {initText && <p className='text-5xl font-bold'>{initText}</p>}
+        {initText && <p className='text-2xl font-bold'>{initText}</p>}
 
         {initText && <p className='font-bold'>---</p>}
 
         {!!translatedTextList.length && (
           <>
-            <p className='text-5xl font-bold flex flex-col gap-2'>
+            <ul className='font-bold flex flex-col gap-2 text-2xl'>
               {translatedTextList.map((term: any, index) => (
-                <span key={index}>
-                  {`${term.displayTarget}: `}
+                <li key={index}>
+                <span>
+                  <span className=''>
+                    {`${term.displayTarget}: `}
+                  </span>
+
                   <span className='italic'>
                     {term.posTag}
                   </span>
                 </span>
+
+                <PlayButton
+                  onClick={() => {
+                    handleSynthesize(term.displayTarget)
+                  }}
+                />
+                </li>
               ))}
-            </p>
+            </ul>
           </>
         )}
 
         {!!translatedHighlightedText && (
           <div>
-            {initHighlightedText && <p className='text-5xl font-bold'>{initHighlightedText}</p>}
+            {initHighlightedText && <p className='font-bold'>{initHighlightedText}</p>}
 
             {initHighlightedText && <p className='font-bold'>---</p>}
 
-            <p className='text-5xl font-bold flex flex-col gap-2'>
+            <p className='font-bold flex flex-col gap-2'>
               {translatedHighlightedText}
             </p>
 
