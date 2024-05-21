@@ -1,0 +1,3 @@
+export const textSmall = 'An old silent pond... A frog jumps into the pond, splash! Silence again.'
+
+export const textMedium = 'His name was Gaal Dornick and he was just a country boy who had never seen Trantor before. That is, not in real life. He had seen it many times on the hyper-video, and occasionally in tremendous three-dimensional newscasts covering an Imperial Coronation or the opening of a Galactic Council. Even though he had lived all his life on the world of Synnax, which circled a star at the edges of the Blue Drift, he was not cut off from civilization, you see. At that time, no place in the Galaxy was.'

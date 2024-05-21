@@ -1,0 +1,1 @@
+export const regexForSingleWord = /[-!.,?/]/g;
