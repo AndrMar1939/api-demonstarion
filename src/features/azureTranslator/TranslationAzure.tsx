@@ -1,21 +1,22 @@
 'use client'
-
 import React, {useEffect, useState} from 'react'
 import { synthesizeSpeech } from '@/entity';
 import { textMedium, convertTextToArr, prepareWordToTranslate, PlayButton } from '@/shared';
-import { translateGoogle } from './lib';
+import { getDictionaryLookup, translateTextAzure } from './lib';
 
-
-
-export const TranslationGoogle = () => {
+export const TranslationAzure = () => {
   const [initText, setInitText] = useState('')
-  const [translatedText, setTranslatedText] = useState('')
+  const [translatedTextList, setTranslatedTextList] = useState([])
+  const [initHighlightedText, setInitHighlightedText] = useState('')
+  const [translatedHighlightedText, setHighlightedTranslatedText] = useState('')
 
   const handleTextSelection = () => {
     const selection = window.getSelection();
     const selectedText = selection ? selection.toString().trim() : ''
     if (selectedText) {
-      setInitText(selectedText);
+      setInitHighlightedText(selectedText);
+      setInitText('')
+      setTranslatedTextList([])
     }
   };
 
@@ -27,19 +28,25 @@ export const TranslationGoogle = () => {
     const word = e.target.innerText;
   
     const preparedText = prepareWordToTranslate(word)
-
-    console.log(preparedText)
   
     setInitText(preparedText)
+    setInitHighlightedText('')
+    setHighlightedTranslatedText('')
   }
 
   useEffect(() => {
     if (initText) {
-      translateGoogle (initText).then(words => {
-        setTranslatedText(words)
+      getDictionaryLookup(initText).then(words => {
+        setTranslatedTextList(words)
       })
     }
-  }, [initText])
+
+    if (initHighlightedText) {
+      translateTextAzure(initHighlightedText).then((text: string) => {
+        setHighlightedTranslatedText(text)
+      })
+    }
+  }, [initText, initHighlightedText])
 
   return (
     <div className='flex gap-20 text-2xl justify-between'>
@@ -64,18 +71,37 @@ export const TranslationGoogle = () => {
 
         {initText && <p className='font-bold'>---</p>}
 
-        {!!translatedText.length && (
+        {!!translatedTextList.length && (
           <>
             <p className='text-5xl font-bold flex flex-col gap-2'>
-              { translatedText} 
+              {translatedTextList.map((term: any, index) => (
+                <span key={index}>
+                  {`${term.displayTarget}: `}
+                  <span className='italic'>
+                    {term.posTag}
+                  </span>
+                </span>
+              ))}
+            </p>
+          </>
+        )}
+
+        {!!translatedHighlightedText && (
+          <div>
+            {initHighlightedText && <p className='text-5xl font-bold'>{initHighlightedText}</p>}
+
+            {initHighlightedText && <p className='font-bold'>---</p>}
+
+            <p className='text-5xl font-bold flex flex-col gap-2'>
+              {translatedHighlightedText}
             </p>
 
             <PlayButton
               onClick={() => {
-                handleSynthesize(translatedText)
+                handleSynthesize(translatedHighlightedText)
               }}
             />
-          </>
+          </div>
         )}
       </div>
     </div>

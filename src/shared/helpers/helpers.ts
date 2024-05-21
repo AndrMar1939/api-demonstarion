@@ -3,7 +3,7 @@ export const convertTextToArr = (text: string) => (
 )
 
 export const prepareWordToTranslate = (text: any) => {
-  const regexForSingleWord = /[-!.,?/]/g;
+  const regexForSingleWord = /[!.,?/]/g;
 
   const preparedText = !!text
     ? text
