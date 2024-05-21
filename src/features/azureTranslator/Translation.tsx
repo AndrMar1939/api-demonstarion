@@ -1,10 +1,10 @@
 'use client'
 import axios from 'axios';
 import React, {useEffect, useState} from 'react'
-import { synthesizeSpeech } from './TextToSpeech';
-import { translateTextAzure, getDictionaryLookup } from './TranslationAzure';
+import { synthesizeSpeech } from '@/entity';
 
 let regexForSingleWord = /[-!.,?/]/g;
+'An old silent pond... A frog jumps into the pond, splash! Silence again.'
 const TEXT_TO_TRANSLATE = [
   'An',
   'old',
