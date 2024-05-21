@@ -2,16 +2,20 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react'
 import { synthesizeSpeech } from './TextToSpeech';
+import { translateTextAzure, getDictionaryLookup } from './TranslationAzure';
 
 let regexForSingleWord = /[-!.,?/]/g;
 const TEXT_TO_TRANSLATE = [
-  'An old',
+  'An',
+  'old',
   'silent',
   'pond...',
-  'A frog',
+  'A',
+  'frog',
   'jumps',
   'into',
-  'the pond,',
+  'the',
+  'pond,',
   'splash!',
   'Silence',
   'again.',
@@ -31,7 +35,7 @@ const translate = async (text: string) => {
 
 function Translation() {
   const [initText, setInitText] = useState('')
-  const [translatedText, setTranslatedText] = useState('')
+  const [translatedTextList, setTranslatedTextList] = useState([])
 
   console.log('rerender')
 
@@ -49,15 +53,20 @@ function Translation() {
 
   useEffect(() => {
     if (initText) {
-      translate(initText).then(text => {
-        setTranslatedText(text)
+      getDictionaryLookup(initText).then(words => {
+        console.log(words)
+        setTranslatedTextList(words)
       })
+
+      // translateTextAzure(initText).then(text => {
+      //   setTranslatedText(text)
+      // })
     }
   }, [initText])
 
   return (
     <div className='flex flex-col gap-2 text-2xl items-center'>
-      <p className='mb-[60px] rounded-xl bg-white p-9 flex flex-wrap w-[600px]' onMouseUp={handleTextSelection}>
+      <p className='mb-[60px] rounded-xl bg-white p-9 flex flex-wrap w-[600px]'>
         {TEXT_TO_TRANSLATE
           .map(word => 
             (<span 
@@ -86,18 +95,23 @@ function Translation() {
 
     {initText && <p className='font-bold'>---</p>}
 
-    {translatedText && (
+    {!!translatedTextList.length && (
       <>
-      <p className='text-5xl font-bold'>{translatedText}</p>
+      <p className='text-5xl font-bold flex flex-col gap-2'>{
+      translatedTextList.map((term: any, index) => (
+        <span key={index}>
+          {`${term.displayTarget} ${term.posTag}`}
+        </span>
+      ))}</p>
 
-      <button
+      {/* <button
         className='mt-3 p-5 rounded-full bg-gray-100 border-[1px] border-solid border-green flex justify-center items-center hover:bg-gray-200 active:bg-gray-300'
         onClick={() => {
-        handleSynthesize(translatedText)
+        // handleSynthesize(translatedText)
       }}
       >
         play sound
-      </button>
+      </button> */}
       
       </>
     )}
