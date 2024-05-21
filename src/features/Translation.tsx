@@ -104,14 +104,14 @@ function Translation() {
         </span>
       ))}</p>
 
-      <button
+      {/* <button
         className='mt-3 p-5 rounded-full bg-gray-100 border-[1px] border-solid border-green flex justify-center items-center hover:bg-gray-200 active:bg-gray-300'
         onClick={() => {
         // handleSynthesize(translatedText)
       }}
       >
         play sound
-      </button>
+      </button> */}
       
       </>
     )}
