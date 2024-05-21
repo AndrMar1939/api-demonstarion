@@ -46,7 +46,10 @@ export const getDictionaryLookup = async (text: string) => {
 
   try {
     const response = await axios.post(url, body, { headers });
-    return response.data;
+
+    const words = response.data.length && response.data[0].translations
+
+    return words;
   } catch (error) {
     console.error('Dictionary lookup error:', error);
   }

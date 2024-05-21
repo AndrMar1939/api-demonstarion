@@ -35,7 +35,7 @@ const translate = async (text: string) => {
 
 function Translation() {
   const [initText, setInitText] = useState('')
-  const [translatedText, setTranslatedText] = useState('')
+  const [translatedTextList, setTranslatedTextList] = useState([])
 
   console.log('rerender')
 
@@ -53,12 +53,9 @@ function Translation() {
 
   useEffect(() => {
     if (initText) {
-      getDictionaryLookup(initText).then(res => {
-        const words = res.length && res[0]?.translations
-
+      getDictionaryLookup(initText).then(words => {
         console.log(words)
-
-        words?.length && setTranslatedText(`word - ${words[0]?.displayTarget}; ${words[0]?.posTag}`)
+        setTranslatedTextList(words)
       })
 
       // translateTextAzure(initText).then(text => {
@@ -69,7 +66,7 @@ function Translation() {
 
   return (
     <div className='flex flex-col gap-2 text-2xl items-center'>
-      <p className='mb-[60px] rounded-xl bg-white p-9 flex flex-wrap w-[600px]' onMouseUp={handleTextSelection}>
+      <p className='mb-[60px] rounded-xl bg-white p-9 flex flex-wrap w-[600px]'>
         {TEXT_TO_TRANSLATE
           .map(word => 
             (<span 
@@ -98,14 +95,19 @@ function Translation() {
 
     {initText && <p className='font-bold'>---</p>}
 
-    {translatedText && (
+    {!!translatedTextList.length && (
       <>
-      <p className='text-5xl font-bold'>{translatedText}</p>
+      <p className='text-5xl font-bold flex flex-col gap-2'>{
+      translatedTextList.map((term: any, index) => (
+        <span key={index}>
+          {`${term.displayTarget} ${term.posTag}`}
+        </span>
+      ))}</p>
 
       <button
         className='mt-3 p-5 rounded-full bg-gray-100 border-[1px] border-solid border-green flex justify-center items-center hover:bg-gray-200 active:bg-gray-300'
         onClick={() => {
-        handleSynthesize(translatedText)
+        // handleSynthesize(translatedText)
       }}
       >
         play sound
