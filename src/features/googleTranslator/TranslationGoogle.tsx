@@ -42,42 +42,53 @@ export const TranslationGoogle = () => {
   }, [initText])
 
   return (
-    <div className='flex gap-20 text-2xl justify-between'>
-      <p
-        className='mb-[60px] rounded-xl bg-white p-9 flex flex-wrap w-[800px]'
-        onMouseUp={handleTextSelection}
-      >
-        {convertTextToArr(textMedium)
-          .map(word => 
-            (<span 
-                className='hover:bg-slate-200 rounded-full px-1 py-1 transition-all duration-300 cursor-pointer'
-                key={word}
-                onClick={handleWordClick}
-              >
-                {word}
-              </span>
-          ))}
-      </p>
+   <>
+      <div className='flex gap-20 text-2xl justify-between'>
+        <p
+          className='mb-[60px] rounded-xl bg-white p-9 flex flex-wrap w-[800px]'
+          onMouseUp={handleTextSelection}
+        >
+          {convertTextToArr(textMedium)
+            .map(word => 
+              (<span 
+                  className='hover:bg-slate-200 rounded-full px-1 py-1 transition-all duration-300 cursor-pointer'
+                  key={word}
+                  onClick={handleWordClick}
+                >
+                  {word}
+                </span>
+            ))}
+        </p>
 
-      <div className='w-[400px]'>
-        {initText && <p className='text-2xl font-bold'>{initText}</p>}
+        <div className='w-[400px]'>
+          {initText && <p className='text-2xl font-bold'>{initText}</p>}
 
-        {initText && <p className='font-bold'>---</p>}
+          {initText && <p className='font-bold'>---</p>}
 
-        {!!translatedText.length && (
-          <>
-            <p className='text-2xl font-bold flex flex-col gap-2'>
-              { translatedText} 
-            </p>
+          {!!translatedText.length && (
+            <>
+              <p className='text-2xl font-bold flex flex-col gap-2'>
+                { translatedText} 
+              </p>
 
-            <PlayButton
-              onClick={() => {
-                handleSynthesize(translatedText)
-              }}
-            />
-          </>
-        )}
+              <PlayButton
+                onClick={() => {
+                  handleSynthesize(translatedText)
+                }}
+              />
+            </>
+          )}
+        </div>
       </div>
-    </div>
+
+      {!!translatedText.length && (
+        <iframe
+            src={`https://www.wordreference.com/ende/${translatedText}`}
+            title="WordReference Translation"
+            width="400"
+            height="800"
+        ></iframe>
+      )}
+    </>
   )
 }
