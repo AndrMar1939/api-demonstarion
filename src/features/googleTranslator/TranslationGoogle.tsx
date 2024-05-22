@@ -85,7 +85,7 @@ export const TranslationGoogle = () => {
         <iframe
             src={`https://www.wordreference.com/ende/${encodeURIComponent(translatedText)}`}
             title="WordReference Translation"
-            width="400"
+            width="700"
             height="800"
         ></iframe>
       )}
