@@ -8,7 +8,6 @@ export const prepareWordToTranslate = (text: any) => {
   const preparedText = !!text
     ? text
       .replace(regexForSingleWord, '')
-      .toLowerCase()
     : '';
 
   return preparedText;
