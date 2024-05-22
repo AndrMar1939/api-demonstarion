@@ -83,7 +83,7 @@ export const TranslationGoogle = () => {
 
       {!!translatedText.length && (
         <iframe
-            src={`https://www.wordreference.com/ende/${translatedText}`}
+            src={`https://www.wordreference.com/ende/${encodeURIComponent(translatedText)}`}
             title="WordReference Translation"
             width="400"
             height="800"
