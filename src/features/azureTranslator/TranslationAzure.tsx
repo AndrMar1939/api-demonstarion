@@ -73,6 +73,12 @@ export const TranslationAzure = () => {
 
         {!!translatedTextList.length && (
           <>
+            <PlayButton
+              onClick={() => {
+                handleSynthesize(initText)
+              }}
+            />
+
             <ul className='font-bold flex flex-col gap-2 text-2xl'>
               {translatedTextList.map((term: any, index) => (
                 <li key={index}>
@@ -85,12 +91,6 @@ export const TranslationAzure = () => {
                     {term.posTag}
                   </span>
                 </span>
-
-                <PlayButton
-                  onClick={() => {
-                    handleSynthesize(term.displayTarget)
-                  }}
-                />
                 </li>
               ))}
             </ul>
@@ -109,7 +109,7 @@ export const TranslationAzure = () => {
 
             <PlayButton
               onClick={() => {
-                handleSynthesize(translatedHighlightedText)
+                handleSynthesize(initHighlightedText)
               }}
             />
           </div>

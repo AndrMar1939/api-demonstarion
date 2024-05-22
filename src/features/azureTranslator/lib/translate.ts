@@ -5,7 +5,7 @@ const endpoint = process.env.NEXT_PUBLIC_AZURE_TRANSLATOR_ENDPOINT;
 const location = 'italynorth';
 
 export const translateTextAzure = async (text: string) => {
-  const url = `${endpoint}/translate?api-version=3.0&from=en&to=de`;
+  const url = `${endpoint}/translate?api-version=3.0&from=de&to=en`;
 
   const headers = {
     'Ocp-Apim-Subscription-Key': subscriptionKey,
@@ -31,7 +31,7 @@ export const translateTextAzure = async (text: string) => {
 
 
 export const getDictionaryLookup = async (text: string) => {
-  const url = `https://api.cognitive.microsofttranslator.com/dictionary/lookup?api-version=3.0&from=en&to=de`;
+  const url = `https://api.cognitive.microsofttranslator.com/dictionary/lookup?api-version=3.0&from=de&to=en`;
   
   const headers = {
     'Ocp-Apim-Subscription-Key': subscriptionKey,

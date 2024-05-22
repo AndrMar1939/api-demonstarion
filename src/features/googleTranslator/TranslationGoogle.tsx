@@ -73,7 +73,7 @@ export const TranslationGoogle = () => {
 
               <PlayButton
                 onClick={() => {
-                  handleSynthesize(translatedText)
+                  handleSynthesize(initText)
                 }}
               />
             </>
@@ -83,7 +83,7 @@ export const TranslationGoogle = () => {
 
       {!!translatedText.length && (
         <iframe
-            src={`https://www.wordreference.com/ende/${encodeURIComponent(translatedText)}`}
+            src={`https://www.wordreference.com/deen/${encodeURIComponent(initText)}`}
             title="WordReference Translation"
             width="700"
             height="800"
