@@ -1,4 +1,16 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+import withPWAInit from "@ducanh2912/next-pwa";
 
-export default nextConfig;
+const withPWA = withPWAInit({
+  disable: process.env.NODE_ENV === "development",
+  // dest: "public",
+  disable: false,
+  runtimeCaching: [],
+  fallbacks: {
+    document: "/~offline",
+  },
+});
+
+export default withPWA({
+
+});

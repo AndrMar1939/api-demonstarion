@@ -98,7 +98,7 @@ export const TranslationAzure = () => {
 
           {initText && <p className='font-bold'>---</p>}
 
-          {!!translatedTextList.length && (
+          {!!translatedTextList?.length && (
             <>
               <PlayButton
                 onClick={() => {

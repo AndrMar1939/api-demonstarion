@@ -90,7 +90,7 @@ export const TranslationGoogle = () => {
 
           {initText && <p className='font-bold'>---</p>}
 
-          {!!translatedText.length && (
+          {!!translatedText?.length && (
             <>
               <p className='text-2xl font-bold flex flex-col gap-2'>
                 { translatedText} 
@@ -106,7 +106,7 @@ export const TranslationGoogle = () => {
         </div>
       </div>
 
-      {!!translatedText.length && (
+      {!!translatedText?.length && (
         <iframe
             src={`https://www.wordreference.com/deen/${encodeURIComponent(initText)}`}
             title="WordReference Translation"
