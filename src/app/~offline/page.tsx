@@ -1,5 +1,11 @@
-export default function Page() {
+import React from 'react';
+
+const OfflinePage = () => {
   return (
-      <h1 className="text-3xl font-semibold mx-auto w-fit">Offline Library</h1>
+    <div>
+      <h1>Offline</h1>
+    </div>
   );
-}
+};
+
+export default OfflinePage;
