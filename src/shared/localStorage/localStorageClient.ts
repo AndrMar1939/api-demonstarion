@@ -1,41 +1,46 @@
 import type { TextInLibrary } from "@/types";
 
 const LOCAL_STORAGE_LIBRARY_KEY = 'library'
+const IS_SERVER_COMPONENT = typeof window === 'undefined';
 
 
 export const saveTextToStorage = (text: TextInLibrary) => {
+  if(IS_SERVER_COMPONENT) {
+    return false
+  }
+
   const stored = localStorage.getItem(LOCAL_STORAGE_LIBRARY_KEY);
-  const storedTexts: any[] = stored ? JSON.parse(stored) : [];
-  const isTextInStorage = storedTexts.includes((item: TextInLibrary) => item.id === text.id)
+  const storedTexts: TextInLibrary[] = stored ? JSON.parse(stored) : []; 
+  const isTextInStorage = storedTexts.some((item: TextInLibrary) => item?.id === text.id);
 
   if (!isTextInStorage) {
-    const updatedTexts = storedTexts.push(text);
-  
-    localStorage.setItem(LOCAL_STORAGE_LIBRARY_KEY, JSON.stringify(updatedTexts));
-
-    return true; 
+    storedTexts.push(text);
+    localStorage.setItem(LOCAL_STORAGE_LIBRARY_KEY, JSON.stringify(storedTexts));
   }
-  
-  return false;
 }
 
 export const deleteTextFromStorage = (textId: number) => {
+  if(IS_SERVER_COMPONENT) {
+    return false
+  }
+
   const stored = localStorage.getItem(LOCAL_STORAGE_LIBRARY_KEY);
-  const storedTexts: any[] = stored ? JSON.parse(stored) : [];
+  const storedTexts: TextInLibrary[] = stored ? JSON.parse(stored) : [];
   
   const updatedTexts = storedTexts.filter((item: TextInLibrary) => item.id !== textId);
 
   if (updatedTexts.length !== storedTexts.length) {
     localStorage.setItem(LOCAL_STORAGE_LIBRARY_KEY, JSON.stringify(updatedTexts));
-    return true; 
   }
-  
-  return false;
 }
 
 export const isTextInStorage = (textId: number): boolean => {
+  if(IS_SERVER_COMPONENT) {
+    return false
+  }
+
   const stored = localStorage.getItem(LOCAL_STORAGE_LIBRARY_KEY);
-  const storedTexts: any[] = stored ? JSON.parse(stored) : [];
+  const storedTexts: TextInLibrary[] = stored ? JSON.parse(stored) : [];
 
   return storedTexts.some((item: TextInLibrary) => item.id === textId);
 }

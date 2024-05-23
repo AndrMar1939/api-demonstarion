@@ -4,12 +4,13 @@ import React, {useEffect, useState} from 'react'
 import { synthesizeSpeech } from '@/entity';
 import { textMedium, convertTextToArr, prepareWordToTranslate, PlayButton } from '@/shared';
 import { translateGoogle } from './lib';
-
-
+import { isTextInStorage, saveTextToStorage, deleteTextFromStorage } from '@/shared/localStorage';
 
 export const TranslationGoogle = () => {
   const [initText, setInitText] = useState('')
   const [translatedText, setTranslatedText] = useState('')
+  const [isTextSaved, setTextSaved] = useState(isTextInStorage(textMedium.id))
+  const [isClient, setIsClient] = useState(false)
 
   const handleTextSelection = () => {
     const selection = window.getSelection();
@@ -41,18 +42,42 @@ export const TranslationGoogle = () => {
     }
   }, [initText])
 
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if(!isClient) {
+    return null
+  }
+
   return (
    <>
+      <button
+        className='bg-slate-100 rounded-sm mb-5'
+        onClick={() => {
+        setTextSaved(prev => !prev)
+
+        if (isTextSaved) {
+          deleteTextFromStorage(textMedium.id)
+          return
+        }
+
+        saveTextToStorage(textMedium);
+      }}
+      >
+        {isTextSaved ? 'delete saved text' : 'save text'}
+      </button>
+  
       <div className='flex gap-20 text-2xl justify-between'>
         <p
           className='mb-[60px] rounded-xl bg-white p-9 flex flex-wrap w-[800px]'
           onMouseUp={handleTextSelection}
         >
           {convertTextToArr(textMedium.content)
-            .map(word => 
+            .map((word, index) => 
               (<span 
                   className='hover:bg-slate-200 rounded-full px-1 py-1 transition-all duration-300 cursor-pointer'
-                  key={word}
+                  key={index}
                   onClick={handleWordClick}
                 >
                   {word}
