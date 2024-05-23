@@ -48,7 +48,7 @@ export const TranslationGoogle = () => {
           className='mb-[60px] rounded-xl bg-white p-9 flex flex-wrap w-[800px]'
           onMouseUp={handleTextSelection}
         >
-          {convertTextToArr(textMedium)
+          {convertTextToArr(textMedium.content)
             .map(word => 
               (<span 
                   className='hover:bg-slate-200 rounded-full px-1 py-1 transition-all duration-300 cursor-pointer'

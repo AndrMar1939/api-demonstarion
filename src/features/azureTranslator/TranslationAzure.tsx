@@ -1,7 +1,7 @@
 'use client'
 import React, {useEffect, useState} from 'react'
 import { synthesizeSpeech } from '@/entity';
-import { textMedium, convertTextToArr, prepareWordToTranslate, PlayButton } from '@/shared';
+import { textSmall, convertTextToArr, prepareWordToTranslate, PlayButton } from '@/shared';
 import { getDictionaryLookup, translateTextAzure } from './lib';
 
 export const TranslationAzure = () => {
@@ -54,7 +54,7 @@ export const TranslationAzure = () => {
         className='mb-[60px] rounded-xl bg-white p-9 flex flex-wrap w-[800px]'
         onMouseUp={handleTextSelection}
       >
-        {convertTextToArr(textMedium)
+        {convertTextToArr(textSmall.content)
           .map(word => 
             (<span 
                 className='hover:bg-slate-200 rounded-full px-1 py-1 transition-all duration-300 cursor-pointer'
