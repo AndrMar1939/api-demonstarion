@@ -62,7 +62,7 @@ export default function RootLayout({
           <Link href='/library'>Library</Link>
         </header>
 
-        <main className="px-24 py-4 min-h-screen">
+        <main className="px-24 py-4">
           {children}
         </main>
       </body>

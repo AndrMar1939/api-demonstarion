@@ -38,7 +38,7 @@ export const textAssets: TextInLibrary[] = [
   {
     slug: 'dewqqw',
     id: 3,
-    title: 'International Booker Prize',
+    title: 'International',
     description: 'Lorem ipsum dolor, sit amet ',
     content:
       'Mit dem International Booker Prize werden fremdsprachige Werke, die ins Englische übersetzt wurden, ausgezeichnet. Jenny Erpenbecks Roman "Kairos" von 2021 ist das erste im Original deutschsprachige Buch, das diesen Preis erhält.',
