@@ -1,12 +1,19 @@
 'use client'
 
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, FC} from 'react'
 import { synthesizeSpeech } from '@/entity';
 import { textMedium, convertTextToArr, prepareWordToTranslate, PlayButton } from '@/shared';
 import { translateGoogle } from './lib';
 import { isTextInStorage, saveTextToStorage, deleteTextFromStorage } from '@/shared/localStorage';
+import type { TextInLibrary } from '@/types';
 
-export const TranslationGoogle = () => {
+interface LibraryItemProps {
+  content: TextInLibrary
+}
+
+// : FC<LibraryItemProps> 
+
+export const LibraryItem= ({}) => {
   const [initText, setInitText] = useState('')
   const [translatedText, setTranslatedText] = useState('')
   const [isTextSaved, setTextSaved] = useState(isTextInStorage(textMedium.id))
@@ -53,7 +60,7 @@ export const TranslationGoogle = () => {
   return (
    <>
       <button
-        className='bg-slate-100 rounded-sm mb-5'
+        className='w-[80px] py-2 bg-yellow-300 rounded-xl flex justify-center items-center mb-5'
         onClick={() => {
         setTextSaved(prev => !prev)
 
@@ -106,14 +113,14 @@ export const TranslationGoogle = () => {
         </div>
       </div>
 
-      {!!translatedText?.length && (
+      {/* {!!translatedText?.length && (
         <iframe
             src={`https://www.wordreference.com/deen/${encodeURIComponent(initText)}`}
             title="WordReference Translation"
             width="700"
             height="800"
         ></iframe>
-      )}
+      )} */}
     </>
   )
 }

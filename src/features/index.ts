@@ -1,1 +1,3 @@
-export { TranslationGoogle } from './googleTranslator/TranslationGoogle'
+export { LibraryItem } from './googleTranslator/LibraryItem';
+
+export { LibraryListOnline } from './libraryList/LibraryListOnline';

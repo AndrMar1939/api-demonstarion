@@ -1,4 +1,7 @@
 export interface TextInLibrary {
-  id: number, 
-  content: string
+  id: number;
+  content: string;
+  description: string;
+  title: string;
+  slug: string;
 }
